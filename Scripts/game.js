@@ -1,3 +1,13 @@
+/**
+ * Arlina Ramrattan 
+ * Date Last Modified: July 13, 2016
+ * 
+ * This program is a slot machine game that lets a player bet money and spin 
+ * a reel to win or lose money.
+ *  
+ * 
+ */
+
 //storing controls in varibles
 var btnSpin = document.getElementById("btnSpin");
 var btnReset = document.getElementById("btnReset");

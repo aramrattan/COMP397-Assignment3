@@ -74,6 +74,8 @@ function showLossMessage() {
     playerMoney -= playerBet;
     lblMoney.textContent = "$" + playerMoney;
     resetFruitTally();
+    //so that player is losing the bet value
+    lblJackpot.textContent = "-$" + playerBet;
 }
 
 /* Utility function to check if a value falls within a range of bounds */
@@ -135,8 +137,10 @@ function determineWinnings() {
         showWinMessage();
     }
     else {
-
+        //setting winnings to negative bet so that it dsplays how much you lost
+        winnings = -10;
         showLossMessage();
+
     }
 
 }
@@ -160,6 +164,7 @@ btnSpin.addEventListener('click', function () {
     }
     else if (playerBet <= playerMoney) {
         spinResult = Reels();
+
         //for a valid bet choose the correct image to display from a random value
         switch (spinResult[0]) {
             case 0:
@@ -209,7 +214,7 @@ btnSpin.addEventListener('click', function () {
 
 //method for the reset button that sets everything back to the default values
 btnReset.addEventListener("click", function () {
-    
+
     resetFruitTally();
     resetAll();
     showPlayerStats();
@@ -220,6 +225,6 @@ btnReset.addEventListener("click", function () {
 });
 
 //method for the quit button that exits the game
-btnQuit.addEventListener("click", function(){
+btnQuit.addEventListener("click", function () {
     window.close();
 });

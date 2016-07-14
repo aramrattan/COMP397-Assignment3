@@ -9,23 +9,76 @@
 
 .image1 {
     position:absolute; 
-    TOP:60px; 
+    TOP:140px; 
     LEFT:60px; 
     WIDTH:100px;
     HEIGHT:150px
 }
 .image2{
     position:absolute; 
-    TOP:60px; 
+    TOP:140px; 
     LEFT:210px; 
     WIDTH:100px;
     HEIGHT:150px
 }
 .image3{
     position:absolute; 
-    TOP:60px; 
+    TOP:140px; 
     LEFT:360px; 
     WIDTH:100px;
     HEIGHT:150px
 
+}
+#btnSpin{
+    position: absolute;
+    top:481px;
+    left: 394px;
+    height: 100px;
+    width: 100px;
+    background-color: #10ff20;
+    
+}
+#btnReset{
+    position: absolute;
+    top:498px;
+    left: 228px;
+    height: 75px;
+    width: 75px;
+    background-color: #e50e0e;
+}
+#btnQuit{
+    position: absolute;
+    top:498px;
+    left: 40px;
+    height: 75px;
+    width: 75px;
+    background-color: #e50e0e;
+}
+label, text{
+    background-color: #000000;
+    color: red;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 250%;
+}
+#lblMoney{
+    position: absolute;
+    top: 380px;
+    left: 56px;
+    height: 50px;
+    width: 115px;
+
+}
+#lblJackpot{
+    position: absolute;
+    top: 380px;
+    left: 356px;
+    height: 50px;
+    width: 115px;
+}
+#txtBet{
+    position: absolute;
+    top: 380px;
+    left: 228px;
+    height: 50px;
+    width: 65px;
 }

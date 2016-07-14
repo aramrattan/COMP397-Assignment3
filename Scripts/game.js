@@ -9,18 +9,7 @@ var image1 = document.getElementById("image1");
 var image2 = document.getElementById("image2");
 var image3 = document.getElementById("image3");
 
-/**
- * function to validate whether the bet is more than the amount of money
- * 
- * @method 
- * @return {void}
- */
-function validateBet() {
-    if (Number(txtBet.textContent) <= Number(lblMoney.textContent))
-    {
-        btnSpin.disable=true;
-    }
-}
+
 
 var playerMoney = 1000;
 var winnings = 0;
@@ -33,13 +22,15 @@ var tweety = 0;
 var sylvester = 0;
 var hector = 0;
 
+//function to set values on the load of the game
 
 /* Utility function to show Player Stats */
-function showPlayerStats()
-{
-    lblJackpot.textContent("Jackpot: " + jackpot);
-    lblMoney.textContent("Player Money: " + playerMoney);
-   
+function showPlayerStats() {
+    // alert(playerBet);
+    lblJackpot.textContent = "$" + winnings;
+    lblMoney.textContent = "$" + playerMoney;
+    txtBet.textContent = "$" + playerBet;
+
 }
 
 /* Utility function to reset all fruit tallies */
@@ -53,7 +44,8 @@ function resetFruitTally() {
 function resetAll() {
     playerMoney = 1000;
     jackpot = 5000;
-    playerBet = 0;
+    playerBet = 10;
+    winnings = 0;
 }
 
 
@@ -72,7 +64,7 @@ function checkJackPot() {
 /* Utility function to show a win message and increase player money */
 function showWinMessage() {
     playerMoney += winnings;
-    lblMoney.textContent(winnings);
+    lblMoney.textContent = "$" + playerMoney;
     resetFruitTally();
     checkJackPot();
 }
@@ -80,14 +72,13 @@ function showWinMessage() {
 /* Utility function to show a loss message and reduce player money */
 function showLossMessage() {
     playerMoney -= playerBet;
-    lblMoney.textContent(playerMoney);
+    lblMoney.textContent = "$" + playerMoney;
     resetFruitTally();
 }
 
 /* Utility function to check if a value falls within a range of bounds */
 function checkRange(value, lowerBounds, upperBounds) {
-    if (value >= lowerBounds && value <= upperBounds)
-    {
+    if (value >= lowerBounds && value <= upperBounds) {
         return value;
     }
     else {
@@ -122,25 +113,20 @@ function Reels() {
 }
 
 /* This function calculates the player's winnings, if any */
-function determineWinnings()
-{
-    if (hector == 0)
-    {
+function determineWinnings() {
+    if (hector == 0) {
         if (tweety == 3) {
             winnings = playerBet * 10;
         }
-        else if(sylvester == 3) {
+        else if (sylvester == 3) {
             winnings = jackpot;
             alert("I did, I did tee a puddy tat! ")
-        }
-        else if (hector <= 3) {
-            winnings = playerBet * 30;
         }
         else if (tweety == 2) {
             winnings = playerBet * 2;
         }
         else if (sylvester == 2) {
-            winnings = playerBet * 2;
+            winnings = playerBet * 100;
         }
         else {
             winnings = playerBet * 1;
@@ -148,20 +134,19 @@ function determineWinnings()
         //winNumber++;
         showWinMessage();
     }
-    else
-    {
-        lossNumber++;
+    else {
+
         showLossMessage();
     }
-    
+
 }
 
-/* When the player clicks the spin button the game kicks off */
-btnSpin.click(function () {
-    playerBet = Number(txtBet.textContent());
 
-    if (playerMoney == 0)
-    {
+/* When the player clicks the spin button the game kicks off */
+btnSpin.addEventListener('click', function () {
+
+    //validating whether the bet value is valid or not
+    if (playerMoney == 0) {
         if (confirm("You ran out of Money! \nDo you want to play again?")) {
             resetAll();
             showPlayerStats();
@@ -175,19 +160,66 @@ btnSpin.click(function () {
     }
     else if (playerBet <= playerMoney) {
         spinResult = Reels();
-        character = spinResult[0] + " - " + spinResult[1] + " - " + spinResult[2];
-        
+        //for a valid bet choose the correct image to display from a random value
+        switch (spinResult[0]) {
+            case 0:
+                image1.setAttribute("src", "Assets/images/tweety.png");
+                break;
+            case 1:
+                image1.setAttribute("src", "Assets/images/sylvester.png");
+                break;
+            case 2:
+                image1.setAttribute("src", "Assets/images/hector.gif");
+                break;
+        }
+        switch (spinResult[1]) {
+            case 0:
+                image2.setAttribute("src", "Assets/images/tweety.png");
+                break;
+            case 1:
+                image2.setAttribute("src", "Assets/images/sylvester.png");
+                break;
+            case 2:
+                image2.setAttribute("src", "Assets/images/hector.gif");
+                break;
+        }
+        switch (spinResult[2]) {
+            case 0:
+                image3.setAttribute("src", "Assets/images/tweety.png");
+                break;
+            case 1:
+                image3.setAttribute("src", "Assets/images/sylvester.png");
+                break;
+            case 2:
+                image3.setAttribute("src", "Assets/images/hector.gif");
+                break;
+        }
+
         determineWinnings();
-        turn++;
+
         showPlayerStats();
+
     }
     else {
         alert("Please enter a valid bet amount");
     }
-    image1.s
-    
+
+
 });
 
+//method for the reset button that sets everything back to the default values
+btnReset.addEventListener("click", function () {
+    
+    resetFruitTally();
+    resetAll();
+    showPlayerStats();
 
+    image1.setAttribute("src", "../Assets/images/Granny.png");
+    image2.setAttribute("src", "../Assets/images/spin2win.png");
+    image3.setAttribute("src", "../Assets/images/hector.gif");
+});
 
-//txtBet.onchange(validateBet());
+//method for the quit button that exits the game
+btnQuit.addEventListener("click", function(){
+    window.close();
+});
